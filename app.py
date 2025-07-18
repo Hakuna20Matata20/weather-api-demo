@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import random
+import awsgi  # <--- для запуску у AWS Lambda
 
 app = Flask(__name__)
 
@@ -14,5 +15,6 @@ def weather():
         "condition": condition
     })
 
-if __name__ == "__main__":
-    app.run()
+# Вхідна точка для AWS Lambda
+def lambda_handler(event, context):
+    return awsgi.response(app, event, context)
