@@ -1,13 +1,15 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
+Description: Flask Weather API on Lambda
 
 Resources:
-  WeatherFunction:
+  FlaskFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: .
       Handler: app.lambda_handler
       Runtime: python3.11
+      CodeUri: .
+      Timeout: 10
       Events:
         WeatherApi:
           Type: Api
